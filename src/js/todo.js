@@ -10,7 +10,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = require("fs");
 var readlineSync = __importStar(require("readline-sync"));
 function todo() {
-    var todo = fs_1.readFileSync('todo.txt', 'utf8');
+    var todo = "";
+    if (fs_1.existsSync('todo.txt')) {
+        todo = fs_1.readFileSync('todo.txt', 'utf8');
+    }
     while (true) {
         var task = readlineSync.question('Enter a task: ');
         if (task === '') {
