@@ -1,8 +1,11 @@
-import { readFileSync, appendFileSync, writeFileSync } from 'fs';
+import { readFileSync, appendFileSync, writeFileSync, existsSync } from 'fs';
 import * as readlineSync from 'readline-sync';
 
 export function todo() {
-    var todo = readFileSync('todo.txt', 'utf8');
+    var todo: any = "";
+    if (existsSync('todo.txt')) {
+        todo = readFileSync('todo.txt', 'utf8');
+    }
 
     while (true) {
         const task = readlineSync.question('Enter a task: ');
@@ -30,7 +33,7 @@ export function todo() {
             break;
         } else {
             var lines = todo.split('\n');
-            lines.forEach( (element) => {
+            lines.forEach( (element: any) => {
                 if (task === element) {
                     lines.splice(lines.indexOf(element), 1);
                     writeFileSync('todo.txt', lines.join('\n'));
